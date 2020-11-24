@@ -1,17 +1,22 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Calc.Classes
 {
 	class Tokenizer
 	{
+		// This thread helped a lot: https://stackoverflow.com/questions/4680128
+		const string splitPattern = @"([*()\^\/]|(?<!E)[\+\-])";
+
 		public List<Token> Tokenize(string expression)
 		{
 			var tokens = new List<Token>();
+			expression = expression.Replace(" ", "").Replace("\t", "");
+			string[] tokenStrings = Regex.Split(expression, splitPattern);
+			tokenStrings = tokenStrings.Where(str =>  str != "").ToArray();
 
-			// Assumes that tokens are always separated by a single space.
-			// This is very primitive.
-			foreach (var tokenStr in expression.Split(' '))
+			foreach (var tokenStr in tokenStrings)
 			{
 				if (Token.signs.Contains(tokenStr))
 				{

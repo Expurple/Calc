@@ -19,5 +19,17 @@ namespace Calc.Tests
 		{
 			Assert.AreEqual(7, facade.Calculate("+ 3 + 2 + + 2"));
 		}
+
+		[Test]
+		public void ShouldAlsoWorkWithoutSpaces()
+		{
+			Assert.AreEqual(7, facade.Calculate("+3+2++2"));
+		}
+
+		[Test]
+		public void AndWithRandomSpacesAndTabs()
+		{
+			Assert.AreEqual(7, facade.Calculate("	+3 +2+  +2		 "));
+		}
 	}
 }
