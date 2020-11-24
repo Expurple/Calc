@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 
 using Calc.Classes;
+
+[assembly: InternalsVisibleTo("Tests")]
 
 /*
 Ideas for command line options:
