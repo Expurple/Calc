@@ -6,10 +6,19 @@ namespace Calc.Classes
 {
 	class Facade
 	{
+		Tokenizer tokenizer;
+		Calculator calculator;
+
+		public Facade()
+		{
+			tokenizer = new Tokenizer();
+			calculator = new Calculator();
+		}
+
 		public double Calculate(string expression)
 		{
-			throw new NotImplementedException();
-			//return 0;
+			var tokens = tokenizer.Tokenize(expression);
+			return calculator.Calculate(tokens);
 		}
 	}
 }
