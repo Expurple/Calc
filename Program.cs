@@ -2,6 +2,7 @@
 using System.Runtime.CompilerServices;
 
 using Calc.Classes;
+using Calc.Classes.Exceptions;
 
 [assembly: InternalsVisibleTo("Tests")]
 
@@ -32,9 +33,14 @@ namespace Calc
 				Console.Write(result);
 				return (int)ErrorCode.OK;
 			}
-			catch (Exception e)
+			catch (InvalidMathExpression e)
 			{
 				Console.Write($"Error: \"{e.Message}\"");
+				return (int)ErrorCode.InvalidExpression;
+			}
+			catch (Exception e)
+			{
+				Console.Write($"Unexpected error:\n{e}");
 				return (int)ErrorCode.UnexpectedError;
 			}
 		}
@@ -44,6 +50,7 @@ namespace Calc
 			OK = 0,
 			UnexpectedError = -1,
 			NoExpression = -2,
+			InvalidExpression = -3,
 		};
 	}
 }

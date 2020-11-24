@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -27,16 +28,30 @@ namespace Calc.Classes
 				}
 				else // It should be a number
 				{
-					tokens.Add(new Token {
-						type = Token.Type.Number,
-						StrValue = tokenStr,
-						NumericValue = double.Parse(tokenStr,
-								System.Globalization.NumberFormatInfo.InvariantInfo) // *
-						// If can't parse as number, throws an exception
-					});
+					// If can't parse as number, throws an exception
+					var numberToken = ParseNumberToken(tokenStr);
+					tokens.Add(numberToken);
 				}
 			}
 			return tokens;
+		}
+
+		Token ParseNumberToken(string tokenStr)
+		{
+			try
+			{
+				double value = double.Parse(tokenStr,
+						System.Globalization.NumberFormatInfo.InvariantInfo); // *
+				return new Token {
+					type = Token.Type.Number,
+					StrValue = tokenStr,
+					NumericValue = value
+				};
+			}
+			catch (FormatException)
+			{
+				throw new Exceptions.InvalidMathExpression();
+			}
 		}
 	}
 }
