@@ -6,7 +6,15 @@ namespace Calc.Classes
 	{
 		public double Calculate(List<Token> tokens)
 		{
-			return 0.0;
+			double result = 0;
+			foreach (var token in tokens)
+			{
+				if (token.type == Token.Type.Number)
+				{
+					result += token.NumericValue;
+				}
+			}
+			return result;
 		}
 	}
 }
