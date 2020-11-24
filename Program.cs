@@ -16,7 +16,7 @@ namespace Calc
 {
 	class Program
 	{
-		static int Main(string[] args)
+		public static int Main(string[] args)
 		{
 			// This parsing is primitive, but I'll leave it for now
 			if (args.Length == 0)
@@ -39,7 +39,7 @@ namespace Calc
 			}
 		}
 
-		enum ErrorCode
+		public enum ErrorCode
 		{
 			OK = 0,
 			UnexpectedError = -1,
