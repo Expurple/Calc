@@ -30,7 +30,8 @@ namespace Calc.Classes
 					tokens.Add(new Token {
 						type = Token.Type.Number,
 						StrValue = tokenStr,
-						NumericValue = double.Parse(tokenStr)
+						NumericValue = double.Parse(tokenStr,
+								System.Globalization.NumberFormatInfo.InvariantInfo) // *
 						// If can't parse as number, throws an exception
 					});
 				}
@@ -39,3 +40,7 @@ namespace Calc.Classes
 		}
 	}
 }
+
+// *
+// "InvariantInfo" is needed for my Russian system
+// to accept "." as a decimal point instead of ","
