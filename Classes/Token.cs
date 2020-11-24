@@ -6,9 +6,9 @@ namespace Calc.Classes
 	{
 		public static string[] signs = { "+" };
 
-		public double NumericValue;
-		public char CharValue;
 		public Type type;
+		public string StrValue;
+		public double NumericValue;
 
 		public enum Type
 		{

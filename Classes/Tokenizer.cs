@@ -22,15 +22,16 @@ namespace Calc.Classes
 				{
 					tokens.Add(new Token {
 						type = Token.Type.Sign,
-						CharValue = tokenStr[0]
+						StrValue = tokenStr
 					});
 				}
-				else
+				else // It should be a number
 				{
 					tokens.Add(new Token {
 						type = Token.Type.Number,
+						StrValue = tokenStr,
 						NumericValue = double.Parse(tokenStr)
-						// If can't parse, throws an exception
+						// If can't parse as number, throws an exception
 					});
 				}
 			}
