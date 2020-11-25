@@ -26,6 +26,13 @@ namespace Calc.Classes
 						StrValue = tokenStr
 					});
 				}
+				else if (Token.braces.Contains(tokenStr))
+				{
+					tokens.Add(new Token {
+						type = Token.Type.Brace,
+						StrValue = tokenStr
+					});
+				}
 				else // It should be a number
 				{
 					// If can't parse as number, throws an exception
