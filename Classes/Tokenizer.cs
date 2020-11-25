@@ -21,17 +21,11 @@ namespace Calc.Classes
 			{
 				if (Token.signs.Contains(tokenStr))
 				{
-					tokens.Add(new Token {
-						type = Token.Type.Sign,
-						StrValue = tokenStr
-					});
+					tokens.Add(new Token (Token.Type.Sign, tokenStr));
 				}
 				else if (Token.braces.Contains(tokenStr))
 				{
-					tokens.Add(new Token {
-						type = Token.Type.Brace,
-						StrValue = tokenStr
-					});
+					tokens.Add(new Token(Token.Type.Brace, tokenStr));
 				}
 				else // It should be a number
 				{
@@ -49,11 +43,7 @@ namespace Calc.Classes
 			{
 				double value = double.Parse(tokenStr,
 						System.Globalization.NumberFormatInfo.InvariantInfo); // *
-				return new Token {
-					type = Token.Type.Number,
-					StrValue = tokenStr,
-					NumericValue = value
-				};
+				return new Token (Token.Type.Number, tokenStr, value);
 			}
 			catch (FormatException)
 			{
