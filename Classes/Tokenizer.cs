@@ -19,9 +19,9 @@ namespace Calc.Classes
 
 			foreach (var tokenStr in tokenStrings)
 			{
-				if (Token.signs.Contains(tokenStr))
+				if (tokenStr == "+" || tokenStr == "-")
 				{
-					tokens.Add(new Token (Token.Type.Sign, tokenStr));
+					tokens.Add(new Token (Token.Type.PlusMinus, tokenStr));
 				}
 				else if (Token.braces.Contains(tokenStr))
 				{

@@ -4,7 +4,6 @@ namespace Calc.Classes
 {
 	struct Token
 	{
-		public static string[] signs = { "+" };
 		public static string[] braces = { "(", ")" };
 
 		public Type type;
@@ -21,7 +20,7 @@ namespace Calc.Classes
 		public enum Type
 		{
 			Number,
-			Sign,
+			PlusMinus,
 			Brace,
 		}
 	}
