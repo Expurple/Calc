@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 
 using Calc.Classes;
+using Calc.Classes.Exceptions;
 
 namespace Calc.Tests
 {
@@ -27,6 +28,21 @@ namespace Calc.Tests
 			expected = (int)Calc.Program.ErrorCode.InvalidExpression;
 			actual = Calc.Program.Main(new string[] { "not a math expression" });
 			Assert.AreEqual(expected, actual);
+		}
+
+		[Test]
+		public void InvalidBracesShouldFail()
+		{
+			var facade = new Facade();
+
+			Assert.Throws<Calc.Classes.Exceptions.InvalidMathExpression>(
+				() => { facade.Calculate("(3+2)+2)))"); });
+
+			Assert.Throws<Calc.Classes.Exceptions.InvalidMathExpression>(
+				() => { facade.Calculate("1+1)"); });
+
+			Assert.Throws<Calc.Classes.Exceptions.InvalidMathExpression>(
+				() => { facade.Calculate("0.3-(2"); });
 		}
 	}
 }

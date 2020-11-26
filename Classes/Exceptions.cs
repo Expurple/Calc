@@ -15,4 +15,11 @@ namespace Calc.Classes.Exceptions
 			: base(message)
 		{ }
 	}
+
+	class LogicError : Exception
+	{
+		public LogicError(string message = "Logic error in code")
+			: base(message)
+		{ }
+	}
 }
