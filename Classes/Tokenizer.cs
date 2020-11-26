@@ -23,9 +23,13 @@ namespace Calc.Classes
 				{
 					tokens.Add(new Token (Token.Type.PlusMinus, tokenStr));
 				}
+				else if (tokenStr == "*" || tokenStr == "/")
+				{
+					tokens.Add(new Token (Token.Type.MultiplyDivide, tokenStr));
+				}
 				else if (tokenStr == "(" || tokenStr == ")")
 				{
-					tokens.Add(new Token(Token.Type.Brace, tokenStr));
+					tokens.Add(new Token (Token.Type.Brace, tokenStr));
 				}
 				else // It should be a number
 				{

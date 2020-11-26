@@ -32,9 +32,28 @@ namespace Calc.Classes
 				{
 					nBracesNotClosed--;
 				}
-				if (nBracesNotClosed == 0 &&
+				else if (nBracesNotClosed == 0 &&
 					tokens[i].type == Token.Type.PlusMinus &&
-					tokens[i-1].type != Token.Type.PlusMinus)
+					!tokens[i-1].IsSign) // <-- check if tokens[i] is unary
+				{
+					return PerformOperation(tokens, i);
+				}
+			}
+
+			// Find and execute top level multiplication or division, if present
+			nBracesNotClosed = 0;
+			for (int i = tokens.Count - 1; i > 0; i--)
+			{
+				if (tokens[i].StrValue == ")")
+				{
+					nBracesNotClosed++;
+				}
+				else if (tokens[i].StrValue == "(")
+				{
+					nBracesNotClosed--;
+				}
+				else if (nBracesNotClosed == 0 &&
+					tokens[i].type == Token.Type.MultiplyDivide)
 				{
 					return PerformOperation(tokens, i);
 				}
@@ -56,6 +75,7 @@ namespace Calc.Classes
 				return tokens[0].NumericValue;
 			}
 
+			// Else, the expression is something invalid
 			throw new Exceptions.InvalidMathExpression();
 		}
 
@@ -71,6 +91,10 @@ namespace Calc.Classes
 					return leftValue + rightValue;
 				case "-":
 					return leftValue - rightValue;
+				case "*":
+					return leftValue * rightValue;
+				case "/":
+					return leftValue / rightValue;
 				default:
 					var message = "Calculator.PerformOperation called on invalid sign";
 					throw new Exceptions.LogicError(message);

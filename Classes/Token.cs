@@ -15,10 +15,19 @@ namespace Calc.Classes
 			this.NumericValue = numericValue;
 		}
 
+		public bool IsSign
+		{
+			get
+			{
+				return type == Type.PlusMinus || type == Type.MultiplyDivide;
+			}
+		}
+
 		public enum Type
 		{
 			Number,
 			PlusMinus,
+			MultiplyDivide,
 			Brace,
 		}
 	}
