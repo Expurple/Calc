@@ -15,7 +15,7 @@ namespace Calc.Classes
 		public double Evaluate(List<Token> tokens)
 		{
 			// Remove brackets around the expression
-			while (tokens[0].StrValue == "(" && tokens[^1].StrValue == ")")
+			while (AreInBrackets(tokens))
 			{
 				tokens = tokens.Skip(1).SkipLast(1).ToList();
 			}
@@ -99,6 +99,33 @@ namespace Calc.Classes
 					var message = "Calculator.PerformOperation called on invalid sign";
 					throw new Exceptions.LogicError(message);
 			}
+		}
+
+		private bool AreInBrackets(List<Token> tokens)
+		{
+			if (tokens[0].StrValue != "(" || tokens[^1].StrValue != ")")
+				return false;
+
+			// This logic is a fix for situatuons like "(1) + (2)"
+			int openBrackets = 1;
+			for (int i = 1; i < tokens.Count - 1; i++)
+			{
+				if (tokens[i].StrValue == "(")
+				{
+					openBrackets++;
+				}
+				else if (tokens[i].StrValue == ")")
+				{
+					openBrackets--;
+				}
+				
+				if (openBrackets == 0)
+				{
+					return false;
+				}
+			}
+
+			return true;
 		}
 	}
 }
