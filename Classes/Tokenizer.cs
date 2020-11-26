@@ -23,7 +23,7 @@ namespace Calc.Classes
 				{
 					tokens.Add(new Token (Token.Type.PlusMinus, tokenStr));
 				}
-				else if (Token.braces.Contains(tokenStr))
+				else if (tokenStr == "(" || tokenStr == ")")
 				{
 					tokens.Add(new Token(Token.Type.Brace, tokenStr));
 				}
