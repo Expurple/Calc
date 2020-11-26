@@ -14,11 +14,6 @@ namespace Calc.Classes
 		*/
 		public double Evaluate(List<Token> tokens)
 		{
-			System.Console.Write("Evaluating tokens: ");
-			foreach (var token in tokens)
-				System.Console.Write($"{token.StrValue}, ");
-			System.Console.WriteLine();
-
 			// Remove brackets around the expression
 			while (tokens[0].StrValue == "(" && tokens[^1].StrValue == ")")
 			{
