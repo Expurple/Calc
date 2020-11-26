@@ -43,6 +43,9 @@ namespace Calc.Tests
 
 			Assert.Throws<InvalidMathExpression>(
 				() => { facade.Calculate("0.3-(2"); });
+
+			Assert.Throws<InvalidMathExpression>(
+				() => { facade.Calculate("1 + ()"); });
 		}
 	}
 }

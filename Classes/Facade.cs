@@ -18,7 +18,8 @@ namespace Calc.Classes
 		public double Calculate(string expression)
 		{
 			var tokens = tokenizer.Tokenize(expression);
-			return calculator.Evaluate(tokens);
+			var answer = calculator.Calculate(tokens);
+			return answer;
 		}
 	}
 }

@@ -1,18 +1,30 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Calc.Classes
 {
 	class Calculator
 	{
-		/*
-		All valid types of expressions:
-		1         (just a number)
-		±E        (unary plus/minus before some expression)
-		E ± E     (binary plus/minus between two expressions)
-		(E)       (expression in braces)
-		*/
-		public double Evaluate(List<Token> tokens)
+		/// <summary>
+		/// A wrapper over main method, rethrows more meaningful exceptions
+		/// </summary>
+		public double Calculate(List<Token> tokens)
+		{
+			try
+			{
+				return Evaluate(tokens);
+			}
+			catch (ArgumentOutOfRangeException)
+			{
+				throw new Exceptions.InvalidMathExpression();
+			}
+		}
+
+		/// <summary>
+		/// Recursively calculates math expression's value
+		/// </summary>
+		private double Evaluate(List<Token> tokens)
 		{
 			// Remove brackets around the expression
 			while (AreInBrackets(tokens))
@@ -79,6 +91,10 @@ namespace Calc.Classes
 			throw new Exceptions.InvalidMathExpression();
 		}
 
+		/// <summary>
+		/// Performs arithmetic operations on two math expressions,
+		/// which are evaluated recursively
+		/// </summary>
 		private double PerformOperation(List<Token> tokens, int signIndex)
 		{
 			var leftTokens = tokens.Take(signIndex).ToList();
@@ -101,6 +117,9 @@ namespace Calc.Classes
 			}
 		}
 
+		/// <summary>
+		/// Checks if an expression is in brackets
+		/// </summary>
 		private bool AreInBrackets(List<Token> tokens)
 		{
 			if (tokens[0].StrValue != "(" || tokens[^1].StrValue != ")")
