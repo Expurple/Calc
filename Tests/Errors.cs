@@ -8,7 +8,7 @@ namespace Calc.Tests
 	public class Errors
 	{
 		[Test]
-		public void TestReturnCodes()
+		public void ReturnCodes()
 		{
 			int expected, actual;
 
@@ -35,13 +35,13 @@ namespace Calc.Tests
 		{
 			var facade = new Facade();
 
-			Assert.Throws<Calc.Classes.Exceptions.InvalidMathExpression>(
+			Assert.Throws<InvalidMathExpression>(
 				() => { facade.Calculate("(3+2)+2)))"); });
 
-			Assert.Throws<Calc.Classes.Exceptions.InvalidMathExpression>(
+			Assert.Throws<InvalidMathExpression>(
 				() => { facade.Calculate("1+1)"); });
 
-			Assert.Throws<Calc.Classes.Exceptions.InvalidMathExpression>(
+			Assert.Throws<InvalidMathExpression>(
 				() => { facade.Calculate("0.3-(2"); });
 		}
 	}
