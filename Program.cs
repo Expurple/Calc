@@ -2,7 +2,6 @@
 using System.Runtime.CompilerServices;
 
 using Calc.Classes;
-using Calc.Classes.Exceptions;
 
 [assembly: InternalsVisibleTo("Tests")]
 
@@ -21,42 +20,10 @@ namespace Calc
 		public static int Main(string[] args)
 		{
 			var facade = new Facade();
-			try
-			{
-				// This parsing is primitive, but I'll leave it for now
-				if (args.Length == 0)
-				{
-					throw new NoMathExpressionProvided();
-				}
-				else if (args.Length > 1)
-				{
-					throw new TooManyArguments();
-				}
+			var result = facade.Process(args);
 
-				double result = facade.Calculate(args[0]);
-				Console.Write(result);
-				return (int)ErrorCode.OK;
-			}
-			catch (NoMathExpressionProvided e)
-			{
-				Console.Write($"Error: \"{e.Message}\"");
-				return (int)ErrorCode.NoExpression;
-			}
-			catch (InvalidMathExpression e)
-			{
-				Console.Write($"Error: \"{e.Message}\"");
-				return (int)ErrorCode.InvalidExpression;
-			}
-			catch (TooManyArguments e)
-			{
-				Console.Write($"Error: \"{e.Message}\"");
-				return (int)ErrorCode.TooManyArguments;
-			}
-			catch (Exception e)
-			{
-				Console.Write($"Unexpected error:\n{e}");
-				return (int)ErrorCode.UnexpectedError;
-			}
+			Console.Write(result.Output);
+			return (int)result.ReturnCode;
 		}
 
 		public enum ErrorCode
@@ -67,5 +34,11 @@ namespace Calc
 			InvalidExpression = -3,
 			TooManyArguments = -4,
 		};
+
+		public struct Result
+		{
+			public string Output;
+			public ErrorCode ReturnCode;
+		}
 	}
 }
