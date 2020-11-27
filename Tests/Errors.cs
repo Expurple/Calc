@@ -28,6 +28,10 @@ namespace Calc.Tests
 			expected = (int)Calc.Program.ErrorCode.InvalidExpression;
 			actual = Calc.Program.Main(new string[] { "not a math expression" });
 			Assert.AreEqual(expected, actual);
+
+			expected = (int)Calc.Program.ErrorCode.TooManyArguments;
+			actual = Calc.Program.Main(new string[] { "2", "*", "2" });
+			Assert.AreEqual(expected, actual);
 		}
 
 		[Test]

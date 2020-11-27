@@ -28,6 +28,10 @@ namespace Calc
 				{
 					throw new NoMathExpressionProvided();
 				}
+				else if (args.Length > 1)
+				{
+					throw new TooManyArguments();
+				}
 
 				double result = facade.Calculate(args[0]);
 				Console.Write(result);
@@ -43,6 +47,11 @@ namespace Calc
 				Console.Write($"Error: \"{e.Message}\"");
 				return (int)ErrorCode.InvalidExpression;
 			}
+			catch (TooManyArguments e)
+			{
+				Console.Write($"Error: \"{e.Message}\"");
+				return (int)ErrorCode.TooManyArguments;
+			}
 			catch (Exception e)
 			{
 				Console.Write($"Unexpected error:\n{e}");
@@ -56,6 +65,7 @@ namespace Calc
 			UnexpectedError = -1,
 			NoExpression = -2,
 			InvalidExpression = -3,
+			TooManyArguments = -4,
 		};
 	}
 }
