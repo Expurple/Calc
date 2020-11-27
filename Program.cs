@@ -17,15 +17,20 @@ namespace Calc
 	{
 		public static int Main(string[] args)
 		{
-			var arg = new Argument<string>("argument", "An arithmetic expression to solve");
-			
+			var arg = new Argument<string>("argument",
+				"An arithmetic expression to solve.\n" +
+				"Supported operators are +-*/()\n" +
+				"Variables and other operators are not supported.");
+
 			var rootCommand = new RootCommand
 			{
 				arg
 			};
 			rootCommand.Name = "Calc";
-			rootCommand.Description = "A simple command line tool to calculate arithmetic expressions";
-
+			rootCommand.Description = "A tool to calculate arithmetic expressions.\n" +
+				"Prints either a number, \"Infinity\", \"-Infinity\", " + "\"Nan\" or an error.\n" +
+				"For more info on usage visit https://github.com/Expurple/Calc";
+			
 			rootCommand.Handler = CommandHandler.Create<string>(
 				(argument) =>
 			{
@@ -34,7 +39,7 @@ namespace Calc
 
 				if (result.ReturnCode != 0)
 					Console.ForegroundColor = ConsoleColor.Red;
-				Console.Write(result.Output);
+				Console.WriteLine(result.Output);
 				Console.ResetColor();
 
 				return (int)result.ReturnCode;
