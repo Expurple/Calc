@@ -8,9 +8,10 @@ using Calc.Classes.Exceptions;
 
 /*
 Ideas for command line options:
--h --help       show help
--f --file       treat the argument as a file name, and get the expression from that file
--c --no-color   don't color the output
+-h --help           show help
+-f --file           treat the argument as a file name, and get the expression from that file
+-c --no-color       don't color the output
+-p --precision      set output precision
 */
 
 namespace Calc
@@ -19,19 +20,23 @@ namespace Calc
 	{
 		public static int Main(string[] args)
 		{
-			// This parsing is primitive, but I'll leave it for now
-			if (args.Length == 0)
-			{
-				Console.Write("Error: \"No math expression provided!\"");
-				return (int)ErrorCode.NoExpression;
-			}
-
 			var facade = new Facade();
 			try
 			{
+				// This parsing is primitive, but I'll leave it for now
+				if (args.Length == 0)
+				{
+					throw new NoMathExpressionProvided();
+				}
+
 				double result = facade.Calculate(args[0]);
 				Console.Write(result);
 				return (int)ErrorCode.OK;
+			}
+			catch (NoMathExpressionProvided e)
+			{
+				Console.Write($"Error: \"{e.Message}\"");
+				return (int)ErrorCode.NoExpression;
 			}
 			catch (InvalidMathExpression e)
 			{
