@@ -13,7 +13,8 @@ namespace Calc.Classes
 		public List<Token> Tokenize(string expression)
 		{
 			var tokens = new List<Token>();
-			expression = expression.Replace(" ", "").Replace("\t", "");
+			expression = expression.Replace(" ", "").Replace("\t", ""); // Remove whitespace
+			expression = expression.Replace(',', '.'); // Accept ',' as a decimal point
 			string[] tokenStrings = Regex.Split(expression, splitPattern);
 			tokenStrings = tokenStrings.Where(str =>  str != "").ToArray();
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 
 using Calc.Classes.Exceptions;
 
@@ -31,7 +32,7 @@ namespace Calc.Classes
 				}
 
 				double answer = Calculate(args[0]);
-				result.Output = answer.ToString();
+				result.Output = answer.ToString(CultureInfo.InvariantCulture);
 				result.ReturnCode = Program.ErrorCode.OK;
 			}
 			catch (NoMathExpressionProvided e)

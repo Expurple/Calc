@@ -11,6 +11,7 @@ Ideas for command line options:
 -f --file           treat the argument as a file name, and get the expression from that file
 -c --no-color       don't color the output
 -p --precision      set output precision
+   --comma          output "," as a decimal point instead of "."
 */
 
 namespace Calc
