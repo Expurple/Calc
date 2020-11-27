@@ -21,10 +21,10 @@ namespace Calc.Tests.Functionality
 		[Test]
 		public void ReturnsWithPoint()
 		{
-			var result = facade.Process(new string[] { "0,2" });
+			var result = facade.Process("0,2");
 			Assert.AreEqual("0.2", result.Output);
 
-			result = facade.Process(new string[] { "0,2 + 0.2" });
+			result = facade.Process("0,2 + 0.2");
 			Assert.AreEqual("0.4", result.Output);
 		}
 	}
