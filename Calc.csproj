@@ -2,9 +2,12 @@
 
   <PropertyGroup>
 	<OutputType>Exe</OutputType>
-	<TargetFramework>netcoreapp3.1</TargetFramework>
+	<TargetFramework>net5.0</TargetFramework>
 	<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
 	<GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
+	<Authors>Dmitry Alexandrov</Authors>
+	<PackageProjectUrl>https://github.com/Expurple/Calc</PackageProjectUrl>
+	<RepositoryUrl>https://github.com/Expurple/Calc.git</RepositoryUrl>
   </PropertyGroup>
 
 	<ItemGroup>

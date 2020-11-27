@@ -1,18 +1,13 @@
 ﻿using System;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 
 using Calc.Classes;
 
+
+[assembly: AssemblyVersion("0.1.0.0")]
 [assembly: InternalsVisibleTo("Tests")]
 
-/*
-Ideas for command line options:
--h --help           show help
--f --file           treat the argument as a file name, and get the expression from that file
--c --no-color       don't color the output
--p --precision      set output precision
-   --comma          output "," as a decimal point instead of "."
-*/
 
 namespace Calc
 {
