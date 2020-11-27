@@ -18,7 +18,11 @@ namespace Calc
 			var facade = new Facade();
 			var result = facade.Process(args);
 
+			if (result.ReturnCode != 0)
+				Console.ForegroundColor = ConsoleColor.Red;
 			Console.Write(result.Output);
+			Console.ResetColor();
+			
 			return (int)result.ReturnCode;
 		}
 
