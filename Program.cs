@@ -45,11 +45,10 @@ namespace Calc
 
 		public enum ErrorCode
 		{
+			BadCommandLineArguments = 1,
 			OK = 0,
 			UnexpectedError = -1,
-			NoExpression = -2,
-			InvalidExpression = -3,
-			TooManyArguments = -4,
+			InvalidExpression = -2,
 		};
 
 		public struct Result
