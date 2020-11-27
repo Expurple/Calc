@@ -37,17 +37,17 @@ namespace Calc.Classes
 			}
 			catch (NoMathExpressionProvided e)
 			{
-				result.Output = $"Error: \"{e.Message}\"";
+				result.Output = $"Error: {e.Message}";
 				result.ReturnCode = Program.ErrorCode.NoExpression;
 			}
 			catch (InvalidMathExpression e)
 			{
-				result.Output = $"Error: \"{e.Message}\"";
+				result.Output = $"Error: {e.Message}";
 				result.ReturnCode = Program.ErrorCode.InvalidExpression;
 			}
 			catch (TooManyArguments e)
 			{
-				result.Output = $"Error: \"{e.Message}\"";
+				result.Output = $"Error: {e.Message}";
 				result.ReturnCode = Program.ErrorCode.TooManyArguments;
 			}
 			catch (Exception e)
