@@ -11,21 +11,31 @@ namespace Calc.Classes
 		Calculator calculator;
 		NumberFormatter numberFormatter;
 
-		public Facade(bool scientific = false, bool _decimal = false)
+		public Facade()
 		{
 			tokenizer = new Tokenizer();
 			calculator = new Calculator();
-			numberFormatter = new NumberFormatter(scientific, _decimal);
 		}
 
 		public Program.Result Process(string expression)
 		{
+			return Process(expression, Program.Options.Default);
+		}
+
+		public Program.Result Process(string expression, Program.Options options)
+		{
 			var result = new Program.Result();
 			try
 			{
+				Apply(options);
 				double answer = Calculate(expression);
 				result.Output = numberFormatter.Format(answer);
 				result.ReturnCode = Program.ErrorCode.OK;
+			}
+			catch (BadCommandLineArguments e)
+			{
+				result.Output = $"Bad arguments: {e.Message}";
+				result.ReturnCode = Program.ErrorCode.BadCommandLineArguments;
 			}
 			catch (InvalidMathExpression e)
 			{
@@ -46,6 +56,14 @@ namespace Calc.Classes
 			var tokens = tokenizer.Tokenize(expression);
 			var answer = calculator.Calculate(tokens);
 			return answer;
+		}
+
+		private void Apply(Program.Options options)
+		{
+			numberFormatter = new NumberFormatter(
+				scientific: options.ScientificOutput,
+				_decimal: options.DecimalOutput
+			);
 		}
 	}
 }

@@ -17,6 +17,10 @@ namespace Calc.Tests
 			Assert.AreEqual(expected, actual);
 
 			expected = (int)Calc.Program.ErrorCode.BadCommandLineArguments;
+			actual = Calc.Program.Main(new string[] { "0.2 + 0.3", "-Ed"});
+			Assert.AreEqual(expected, actual);
+
+			expected = (int)Calc.Program.ErrorCode.BadCommandLineArguments;
 			actual = Calc.Program.Main(new string[] { "0.2", "+", "0.3" });
 			Assert.AreEqual(expected, actual);
 

@@ -9,6 +9,14 @@ namespace Calc.Classes.Exceptions
 		{ }
 	}
 
+	class BadCommandLineArguments : ArgumentException
+	{
+		public BadCommandLineArguments(string message =
+							"Invalid command line arguments were given")
+			: base(message)
+		{ }
+	}
+
 	class LogicError : Exception
 	{
 		public LogicError(string message = "Logic error in code")

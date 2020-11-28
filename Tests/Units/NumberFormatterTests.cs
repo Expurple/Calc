@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 
 using Calc.Classes;
+using Calc.Classes.Exceptions;
 
 namespace Calc.Tests.Units
 {
@@ -37,6 +38,13 @@ namespace Calc.Tests.Units
 			Assert.IsFalse(numberFormatter.Format(0.267).Contains("E"));
 			Assert.IsFalse(numberFormatter.Format(1.23E+40).Contains("E"));
 			Assert.IsFalse(numberFormatter.Format(1.23E-50).Contains("E"));
+		}
+
+		[Test]
+		public void ScientificDecimalCollision()
+		{
+			Assert.Throws<BadCommandLineArguments>(
+				() => new NumberFormatter(scientific: true, _decimal: true));
 		}
 	}
 }

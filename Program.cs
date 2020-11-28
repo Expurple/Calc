@@ -22,8 +22,14 @@ namespace Calc
 			rootCommand.Handler = CommandHandler.Create<string, bool, bool>(
 				(argument, scientificOutput, decimalOutput) =>
 			{
-				var facade = new Facade(scientificOutput, decimalOutput);
-				var result = facade.Process(argument);
+				var commandLineOptions = new Options
+				{
+					ScientificOutput = scientificOutput,
+					DecimalOutput = decimalOutput
+				};
+
+				var facade = new Facade();
+				var result = facade.Process(argument, commandLineOptions);
 
 				if (result.ReturnCode != 0)
 					Console.ForegroundColor = ConsoleColor.Red;
@@ -34,6 +40,21 @@ namespace Calc
 			});
 
 			return rootCommand.Invoke(args);
+		}
+
+		/// <summary>
+		/// A struct for storing parsed command line options
+		/// </summary>
+		public struct Options
+		{
+			public bool ScientificOutput;
+			public bool DecimalOutput;
+
+			public static readonly Options Default = new Options
+			{
+				ScientificOutput = false,
+				DecimalOutput = false
+			};
 		}
 
 		public enum ErrorCode

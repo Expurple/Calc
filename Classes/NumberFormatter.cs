@@ -8,11 +8,16 @@ namespace Calc.Classes
 
 		public NumberFormatter(bool scientific, bool _decimal)
 		{
-			if (scientific)
+			if (scientific && _decimal)
+			{
+				throw new Exceptions.BadCommandLineArguments(
+					"Can't apply scientific and decimal notation simultaneously.");
+			}
+			else if (scientific)
 			{
 				formatString = "E";
 			}
-			if (_decimal)
+			else if (_decimal)
 			{
 				formatString = "F";
 			}
