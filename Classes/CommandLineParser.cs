@@ -11,9 +11,17 @@ namespace Calc.Classes
 				"Supported operators are +-*/()\n" +
 				"Variables and other operators are not supported.");
 
+			// Options:
+
+			var scientific = new Option<bool>(new string[] { "-E", "--scientific" },
+													"Output in scientific notation");
+
+			// End of options
+
 			var rootCommand = new RootCommand
 			{
-				argument
+				argument,
+				scientific
 			};
 			
 			rootCommand.Name = "Calc";

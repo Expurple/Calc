@@ -11,11 +11,11 @@ namespace Calc.Classes
 		Calculator calculator;
 		NumberFormatter numberFormatter;
 
-		public Facade()
+		public Facade(bool scientific = false)
 		{
 			tokenizer = new Tokenizer();
 			calculator = new Calculator();
-			numberFormatter = new NumberFormatter();
+			numberFormatter = new NumberFormatter(scientific);
 		}
 
 		public Program.Result Process(string expression)
