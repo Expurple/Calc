@@ -13,15 +13,20 @@ namespace Calc.Classes
 
 			// Options:
 
-			var scientific = new Option<bool>(new string[] { "-E", "--scientific" },
-													"Output in scientific notation");
+			var scientific = new Option<bool>(new string[] { "-E", "--scientific-output" },
+					"Force output in scientific notation,\n" +
+					"can't be used together with -d\n");
+			var _decimal = new Option<bool>(new string[] { "-d", "--decimal-output" },
+					"Force output in decimal notation,\n" +
+					"can't be used together with -E\n");
 
 			// End of options
 
 			var rootCommand = new RootCommand
 			{
 				argument,
-				scientific
+				scientific,
+				_decimal
 			};
 			
 			rootCommand.Name = "Calc";

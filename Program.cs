@@ -19,10 +19,11 @@ namespace Calc
 		{
 			var rootCommand = CommandLineParser.DescribeRootCommand();
 			
-			rootCommand.Handler = CommandHandler.Create<string, bool>(
-				(argument, scientific) =>
+			rootCommand.Handler = CommandHandler.Create<string, bool, bool>(
+				(argument, scientificOutput, decimalOutput) =>
 			{
-				var facade = new Facade(scientific);
+				Console.WriteLine(decimalOutput);
+				var facade = new Facade(scientificOutput, decimalOutput);
 				var result = facade.Process(argument);
 
 				if (result.ReturnCode != 0)

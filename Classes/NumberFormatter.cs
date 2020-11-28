@@ -4,13 +4,17 @@ namespace Calc.Classes
 {
 	class NumberFormatter
 	{
-		string formatString = "G0";
+		string formatString = "G0"; // G is default in C#
 
-		public NumberFormatter(bool scientific)
+		public NumberFormatter(bool scientific, bool _decimal)
 		{
 			if (scientific)
 			{
 				formatString = "E";
+			}
+			if (_decimal)
+			{
+				formatString = "F";
 			}
 		}
 
