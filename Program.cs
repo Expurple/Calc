@@ -22,7 +22,6 @@ namespace Calc
 			rootCommand.Handler = CommandHandler.Create<string, bool, bool>(
 				(argument, scientificOutput, decimalOutput) =>
 			{
-				Console.WriteLine(decimalOutput);
 				var facade = new Facade(scientificOutput, decimalOutput);
 				var result = facade.Process(argument);
 
