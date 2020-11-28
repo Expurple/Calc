@@ -9,11 +9,13 @@ namespace Calc.Classes
 	{
 		Tokenizer tokenizer;
 		Calculator calculator;
+		NumberFormatter numberFormatter;
 
 		public Facade()
 		{
 			tokenizer = new Tokenizer();
 			calculator = new Calculator();
+			numberFormatter = new NumberFormatter();
 		}
 
 		public Program.Result Process(string expression)
@@ -22,7 +24,7 @@ namespace Calc.Classes
 			try
 			{
 				double answer = Calculate(expression);
-				result.Output = answer.ToString(CultureInfo.InvariantCulture);
+				result.Output = numberFormatter.Format(answer);
 				result.ReturnCode = Program.ErrorCode.OK;
 			}
 			catch (InvalidMathExpression e)
