@@ -8,8 +8,8 @@ namespace Calc.Classes
 		{
 			var argument = new Argument<string>("argument",
 				"An arithmetic expression to solve.\n" +
-				"Can contain decimal (32.1) or scientific (3.2E+1) numbers\n" +
-				"and the following operators: + - * / ( )\n" +
+				"Can contain decimal or scientific numbers\n" +
+				"and the following operators: + - * / (  )\n" +
 				"Variables and other operators are not supported.");
 
 			// Options:

@@ -15,32 +15,38 @@ namespace Calc
 {
 	class Program
 	{
+		/// <summary>
+		/// Just lets the command line parser do its job and call the RealMain
+		/// </summary>
 		public static int Main(string[] args)
 		{
 			var rootCommand = CommandLineParser.DescribeRootCommand();
-			
-			rootCommand.Handler = CommandHandler.Create<string, int?, bool, bool>(
-				(argument, precision, scientificOutput, decimalOutput) =>
-			{
-				var commandLineOptions = new Options
-				{
-					Precision = precision,
-					ScientificOutput = scientificOutput,
-					DecimalOutput = decimalOutput
-				};
-
-				var facade = new Facade();
-				var result = facade.Process(argument, commandLineOptions);
-
-				if (result.ReturnCode != 0)
-					Console.ForegroundColor = ConsoleColor.Red;
-				Console.WriteLine(result.Output);
-				Console.ResetColor();
-
-				return (int)result.ReturnCode;
-			});
-
+			rootCommand.Handler =
+				CommandHandler.Create<string, int?, bool, bool>(Program.RealMain);
 			return rootCommand.Invoke(args);
+		}
+
+		/// <summary>
+		/// The real Main method, that is called after command line parsing
+		/// </summary>
+		public static int RealMain(string argument, int? precision,
+								bool scientificOutput, bool decimalOutput)
+		{
+			var commandLineOptions = new Options
+			{
+				Precision = precision,
+				ScientificOutput = scientificOutput,
+				DecimalOutput = decimalOutput
+			};
+			var facade = new Facade();
+			var result = facade.Process(argument, commandLineOptions);
+
+			if (result.ReturnCode != 0)
+				Console.ForegroundColor = ConsoleColor.Red;
+			Console.WriteLine(result.Output);
+			Console.ResetColor();
+
+			return (int)result.ReturnCode;
 		}
 
 		/// <summary>
