@@ -1,10 +1,39 @@
 ﻿using System.CommandLine;
+using System.CommandLine.Invocation;
 
 namespace Calc.Classes
 {
-	static class CommandLineParser
+	public class CommandLineParser
 	{
-		public static RootCommand DescribeRootCommand()
+		public delegate int Callback(string expression, Program.Options parsedOptions);
+
+		RootCommand rootCommand;
+
+		// callback is intended to be Program.RealMain,
+		// but it can be swapped for testing
+		public CommandLineParser(Callback callback)
+		{
+			rootCommand = DescribeRootCommand();
+			rootCommand.Handler = CommandHandler.Create <string, int?, bool, bool>(
+				(argument, precision, scientificOutput, decimalOutput) =>
+				{
+					var parsedOptions = new Program.Options
+					{
+						Precision = precision,
+						ScientificOutput = scientificOutput,
+						DecimalOutput = decimalOutput
+					};
+					return callback(argument, parsedOptions);
+				}
+			);
+		}
+
+		public int Invoke(string[] args)
+		{
+			return rootCommand.Invoke(args);
+		}
+
+		RootCommand DescribeRootCommand()
 		{
 			var argument = new Argument<string>("argument",
 				"An arithmetic expression to solve.\n" +
@@ -27,10 +56,7 @@ namespace Calc.Classes
 
 			var rootCommand = new RootCommand
 			{
-				argument,
-				precision,
-				scientific,
-				_decimal
+				argument, precision, scientific, _decimal
 			};
 			
 			rootCommand.Name = "Calc";

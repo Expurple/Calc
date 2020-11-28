@@ -13,33 +13,25 @@ using Calc.Classes;
 
 namespace Calc
 {
-	class Program
+	public class Program
 	{
 		/// <summary>
-		/// Just lets the command line parser do its job and call the RealMain
+		/// An entry point of the program,
+		/// just lets the command line parser do its job and call the RealMain
 		/// </summary>
 		public static int Main(string[] args)
 		{
-			var rootCommand = CommandLineParser.DescribeRootCommand();
-			rootCommand.Handler =
-				CommandHandler.Create<string, int?, bool, bool>(Program.RealMain);
-			return rootCommand.Invoke(args);
+			var commandLineParser = new CommandLineParser(callback: RealMain);
+			return commandLineParser.Invoke(args);
 		}
 
 		/// <summary>
 		/// The real Main method, that is called after command line parsing
 		/// </summary>
-		public static int RealMain(string argument, int? precision,
-								bool scientificOutput, bool decimalOutput)
+		public static int RealMain(string mathExpression, Options commandLineOptions)
 		{
-			var commandLineOptions = new Options
-			{
-				Precision = precision,
-				ScientificOutput = scientificOutput,
-				DecimalOutput = decimalOutput
-			};
 			var facade = new Facade();
-			var result = facade.Process(argument, commandLineOptions);
+			var result = facade.Process(mathExpression, commandLineOptions);
 
 			if (result.ReturnCode != 0)
 				Console.ForegroundColor = ConsoleColor.Red;
