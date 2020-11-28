@@ -4,6 +4,7 @@ using Calc.Tests.Units;
 
 namespace Calc.Tests.Functionality
 {
+	[TestFixture]
 	class Culture : FacadeTestingBase
 	{
 		[Test]

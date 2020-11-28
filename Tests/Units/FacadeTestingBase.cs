@@ -4,11 +4,12 @@ using Calc.Classes;
 
 namespace Calc.Tests.Units
 {
-	class FacadeTestingBase
+	[TestFixture]
+	abstract class FacadeTestingBase
 	{
 		protected Facade facade;
 
-		[SetUp]
+		[OneTimeSetUp]
 		public void Setup()
 		{
 			facade = new Facade();

@@ -5,6 +5,7 @@ using Calc.Classes.Exceptions;
 
 namespace Calc.Tests.Functionality
 {
+	[TestFixture]
 	class Brackets : FacadeTestingBase
 	{
 		[Test]

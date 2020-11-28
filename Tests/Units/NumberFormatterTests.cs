@@ -5,6 +5,7 @@ using Calc.Classes.Exceptions;
 
 namespace Calc.Tests.Units
 {
+	[TestFixture]
 	class NumberFormatterTests
 	{
 		[Test]

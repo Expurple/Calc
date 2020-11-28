@@ -2,6 +2,7 @@
 
 namespace Calc.Tests.Functionality
 {
+	[TestFixture]
 	class ErrorCodes
 	{
 		[Test]
