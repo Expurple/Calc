@@ -13,6 +13,8 @@ namespace Calc.Classes
 
 			// Options:
 
+			var precision = new Option<int?>(new string[] { "-p", "--precision" },
+					"Set output presicion (from 0 to 100)\n");
 			var scientific = new Option<bool>(new string[] { "-E", "--scientific-output" },
 					"Force output in scientific notation,\n" +
 					"can't be used together with -d\n");
@@ -25,6 +27,7 @@ namespace Calc.Classes
 			var rootCommand = new RootCommand
 			{
 				argument,
+				precision,
 				scientific,
 				_decimal
 			};

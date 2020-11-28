@@ -61,8 +61,9 @@ namespace Calc.Classes
 		private void Apply(Program.Options options)
 		{
 			numberFormatter = new NumberFormatter(
-				scientific: options.ScientificOutput,
-				_decimal: options.DecimalOutput
+				precision:   options.Precision,
+				scientific:  options.ScientificOutput,
+				_decimal:    options.DecimalOutput
 			);
 		}
 	}

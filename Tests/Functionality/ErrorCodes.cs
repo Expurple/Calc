@@ -29,6 +29,22 @@ namespace Calc.Tests.Functionality
 		}
 
 		[Test]
+		public void BadOptionValue()
+		{
+			int expected = (int)Calc.Program.ErrorCode.BadCommandLineArguments;
+			int actual = Calc.Program.Main(new string[] { "0.0002", "-p", "-1" });
+			Assert.AreEqual(expected, actual);
+		}
+
+		[Test]
+		public void NonExistingOption()
+		{
+			int expected = (int)Calc.Program.ErrorCode.BadCommandLineArguments;
+			int actual = Calc.Program.Main(new string[] { "2+2", "-z" });
+			Assert.AreEqual(expected, actual);
+		}
+
+		[Test]
 		public void NoArguments()
 		{
 			int expected = (int)Calc.Program.ErrorCode.BadCommandLineArguments;

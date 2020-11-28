@@ -19,11 +19,12 @@ namespace Calc
 		{
 			var rootCommand = CommandLineParser.DescribeRootCommand();
 			
-			rootCommand.Handler = CommandHandler.Create<string, bool, bool>(
-				(argument, scientificOutput, decimalOutput) =>
+			rootCommand.Handler = CommandHandler.Create<string, int?, bool, bool>(
+				(argument, precision, scientificOutput, decimalOutput) =>
 			{
 				var commandLineOptions = new Options
 				{
+					Precision = precision,
 					ScientificOutput = scientificOutput,
 					DecimalOutput = decimalOutput
 				};
@@ -47,11 +48,13 @@ namespace Calc
 		/// </summary>
 		public struct Options
 		{
+			public int? Precision;
 			public bool ScientificOutput;
 			public bool DecimalOutput;
 
 			public static readonly Options Default = new Options
 			{
+				Precision = null,
 				ScientificOutput = false,
 				DecimalOutput = false
 			};

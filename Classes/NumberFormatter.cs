@@ -4,9 +4,9 @@ namespace Calc.Classes
 {
 	class NumberFormatter
 	{
-		string formatString = "G0"; // G is default in C#
+		string formatString = "G"; // it's default, look up MSDN for double.ToString method
 
-		public NumberFormatter(bool scientific, bool _decimal)
+		public NumberFormatter(int? precision, bool scientific, bool _decimal)
 		{
 			if (scientific && _decimal)
 			{
@@ -20,6 +20,20 @@ namespace Calc.Classes
 			else if (_decimal)
 			{
 				formatString = "F";
+			}
+
+			if (precision.HasValue)
+			{
+				// This is required by double.ToString method, look up MSDN
+				if (0 <= precision.Value && precision.Value <= 100)
+				{
+					formatString += precision.ToString();
+				}
+				else
+				{
+					throw new Exceptions.BadCommandLineArguments(
+						"Precision must be in range from 1 to 100.");
+				} 
 			}
 		}
 
