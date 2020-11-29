@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 
 using Calc.Classes.Exceptions;
 

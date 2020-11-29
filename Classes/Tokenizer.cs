@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -46,8 +47,9 @@ namespace Calc.Classes
 		{
 			try
 			{
-				double value = double.Parse(tokenStr,
-						System.Globalization.NumberFormatInfo.InvariantInfo); // *
+				// "InvariantInfo" is needed for my Russian system
+				// to accept "." as a decimal point instead of ","
+				double value = double.Parse(tokenStr, NumberFormatInfo.InvariantInfo);
 				return new Token (Token.Type.Number, tokenStr, value);
 			}
 			catch (FormatException)
@@ -57,7 +59,3 @@ namespace Calc.Classes
 		}
 	}
 }
-
-// *
-// "InvariantInfo" is needed for my Russian system
-// to accept "." as a decimal point instead of ","

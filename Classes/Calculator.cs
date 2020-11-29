@@ -33,18 +33,18 @@ namespace Calc.Classes
 			}
 
 			// Find and execute top level addition or subtraction, if present
-			int nBracesNotClosed = 0;
+			int openBrackets = 0;
 			for (int i = tokens.Count - 1; i > 0; i--)
 			{
 				if (tokens[i].StrValue == ")")
 				{
-					nBracesNotClosed++;
+					openBrackets++;
 				}
 				else if (tokens[i].StrValue == "(")
 				{
-					nBracesNotClosed--;
+					openBrackets--;
 				}
-				else if (nBracesNotClosed == 0 &&
+				else if (openBrackets == 0 &&
 					tokens[i].type == Token.Type.PlusMinus &&
 					!tokens[i-1].IsSign) // <-- check if tokens[i] is unary
 				{
@@ -53,18 +53,18 @@ namespace Calc.Classes
 			}
 
 			// Find and execute top level multiplication or division, if present
-			nBracesNotClosed = 0;
+			openBrackets = 0;
 			for (int i = tokens.Count - 1; i > 0; i--)
 			{
 				if (tokens[i].StrValue == ")")
 				{
-					nBracesNotClosed++;
+					openBrackets++;
 				}
 				else if (tokens[i].StrValue == "(")
 				{
-					nBracesNotClosed--;
+					openBrackets--;
 				}
-				else if (nBracesNotClosed == 0 &&
+				else if (openBrackets == 0 &&
 					tokens[i].type == Token.Type.MultiplyDivide)
 				{
 					return PerformOperation(tokens, i);

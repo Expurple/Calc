@@ -2,9 +2,6 @@
 using System.Reflection;
 using System.Runtime.CompilerServices;
 
-using System.CommandLine;
-using System.CommandLine.Invocation;
-
 using Calc.Classes;
 
 
