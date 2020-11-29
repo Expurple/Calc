@@ -1,17 +1,20 @@
-# Calc
+﻿# Calc
 A simple command line .NET tool to calculate arithmetic expressions, written for fun and education.
 
-* Supports `+-*/` and `()` operators
+* Supports `+ - * /` and `( )` operators
 * Doesn't support variables
-* For avaliable command line options see the [help message](https://github.com/Expurple/Images/blob/master/Calc/0.1.0.0help.png)
+* For avaliable command line options see the [help message](https://github.com/Expurple/Images/blob/master/Calc/0.2.0.0help.png)
 
-## Latest version (0.1.0.0)
+## Latest version (0.2.0.0)
 
-This is the first published version, so it introduced all of the above.
+Added three command line options for output formatting:
+* `-p`, `--precision` - set output presicion
+* `-E`, `--scientific-output` - force output in scientific notation
+* `-d`, `--decimal-output` - force output in decimal notation
 
 Usage example:
 
-![](https://raw.githubusercontent.com/Expurple/Images/master/Calc/0.1.0.0.png)
+![](https://raw.githubusercontent.com/Expurple/Images/master/Calc/0.2.0.0usage.png)
 
 ## How to build
 
@@ -23,7 +26,7 @@ If you wish to build from the command line:
 2) `git clone https://github.com/Expurple/Calc.git some/local/path/to/Calc`
 3) `cd some/local/path/to/Calc`
 4) `dotnet run` (it should build the project an then run in without arguments, you will see a Calc help message then)
-5) Now on Windows you should have **bin/Debug/net5.0/Calc.exe** to run, or a similar file on other systems.
+5) Now on Windows you should have `bin/Debug/net5.0/Calc.exe` to run, or a similar file on other systems.
 
 ## Tests
 
