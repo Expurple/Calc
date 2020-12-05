@@ -14,11 +14,12 @@ namespace Calc.Classes
 		public CommandLineParser(Callback callback)
 		{
 			rootCommand = DescribeRootCommand();
-			rootCommand.Handler = CommandHandler.Create <string, int?, bool, bool>(
-				(argument, precision, scientificOutput, decimalOutput) =>
+			rootCommand.Handler = CommandHandler.Create <string, bool, int?, bool, bool>(
+				(argument, readStdin, precision, scientificOutput, decimalOutput) =>
 				{
 					var parsedOptions = new Program.Options
 					{
+						ReadStdin = readStdin,
 						Precision = precision,
 						ScientificOutput = scientificOutput,
 						DecimalOutput = decimalOutput
@@ -40,9 +41,13 @@ namespace Calc.Classes
 				"Can contain decimal or scientific numbers\n" +
 				"and the following operators: + - * / (  )\n" +
 				"Variables and other operators are not supported.");
+			argument.Arity = ArgumentArity.ZeroOrOne;
 
 			// Options:
 
+			var readStdin = new Option<bool>(new string[] { "-i", "--read-stdin" },
+					"Read the expression from stdin\n" +
+					"instead of command line arguments\n");
 			var precision = new Option<int?>(new string[] { "-p", "--precision" },
 					"Set output presicion (from 0 to 100)\n");
 			var scientific = new Option<bool>(new string[] { "-E", "--scientific-output" },
@@ -56,7 +61,7 @@ namespace Calc.Classes
 
 			var rootCommand = new RootCommand
 			{
-				argument, precision, scientific, _decimal
+				argument, readStdin, precision, scientific, _decimal
 			};
 			
 			rootCommand.Name = "Calc";

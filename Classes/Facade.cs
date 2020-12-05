@@ -16,6 +16,7 @@ namespace Calc.Classes
 			calculator = new Calculator();
 		}
 
+		// An overload for using in tests
 		public Program.Result Process(string expression)
 		{
 			return Process(expression, Program.Options.Default);
@@ -26,6 +27,7 @@ namespace Calc.Classes
 			var result = new Program.Result();
 			try
 			{
+				Check(expression, options);
 				Apply(options);
 				double answer = Calculate(expression);
 				result.Output = numberFormatter.Format(answer);
@@ -55,6 +57,15 @@ namespace Calc.Classes
 			var tokens = tokenizer.Tokenize(expression);
 			var answer = calculator.Calculate(tokens);
 			return answer;
+		}
+
+		private void Check(string expression, Program.Options options)
+		{
+			if (expression == null && options.ReadStdin == false)
+			{
+				throw new BadCommandLineArguments(
+				"Need to provide an expression or use \"-i\" option");
+			}
 		}
 
 		private void Apply(Program.Options options)

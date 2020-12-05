@@ -27,6 +27,9 @@ namespace Calc
 		/// </summary>
 		public static int RealMain(string mathExpression, Options commandLineOptions)
 		{
+			if (commandLineOptions.ReadStdin)
+				mathExpression = Console.ReadLine();
+
 			var facade = new Facade();
 			var result = facade.Process(mathExpression, commandLineOptions);
 
@@ -43,12 +46,14 @@ namespace Calc
 		/// </summary>
 		public struct Options
 		{
+			public bool ReadStdin;
 			public int? Precision;
 			public bool ScientificOutput;
 			public bool DecimalOutput;
 
 			public static readonly Options Default = new Options
 			{
+				ReadStdin = false,
 				Precision = null,
 				ScientificOutput = false,
 				DecimalOutput = false
