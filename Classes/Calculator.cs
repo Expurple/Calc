@@ -81,6 +81,25 @@ namespace Calc.Classes
 					return value;
 			}
 
+			// Find and execute top level raising to power, if present
+			openBrackets = 0;
+			for (int i = tokens.Count - 1; i > 0; i--)
+			{
+				if (tokens[i].StrValue == ")")
+				{
+					openBrackets++;
+				}
+				else if (tokens[i].StrValue == "(")
+				{
+					openBrackets--;
+				}
+				else if (openBrackets == 0 &&
+					tokens[i].type == Token.Type.Power)
+				{
+					return PerformOperation(tokens, i);
+				}
+			}
+
 			// If it's a single number, return the value
 			if (tokens.Count == 1 && tokens[0].type == Token.Type.Number)
 			{
@@ -111,6 +130,8 @@ namespace Calc.Classes
 					return leftValue * rightValue;
 				case "/":
 					return leftValue / rightValue;
+				case "^":
+					return Math.Pow(leftValue, rightValue);
 				default:
 					var message = "Calculator.PerformOperation called on invalid sign";
 					throw new Exceptions.LogicError(message);

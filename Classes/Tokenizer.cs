@@ -29,6 +29,10 @@ namespace Calc.Classes
 				{
 					tokens.Add(new Token (Token.Type.MultiplyDivide, tokenStr));
 				}
+				else if (tokenStr == "^")
+				{
+					tokens.Add(new Token(Token.Type.Power, tokenStr));
+				}
 				else if (tokenStr == "(" || tokenStr == ")")
 				{
 					tokens.Add(new Token (Token.Type.Brace, tokenStr));

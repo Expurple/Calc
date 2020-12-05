@@ -19,7 +19,9 @@ namespace Calc.Classes
 		{
 			get
 			{
-				return type == Type.PlusMinus || type == Type.MultiplyDivide;
+				return type == Type.PlusMinus ||
+						type == Type.MultiplyDivide ||
+						type == Type.Power;
 			}
 		}
 
@@ -28,6 +30,7 @@ namespace Calc.Classes
 			Number,
 			PlusMinus,
 			MultiplyDivide,
+			Power,
 			Brace,
 		}
 	}
