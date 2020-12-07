@@ -1,5 +1,7 @@
 ﻿using System.Globalization;
 
+using Calc.Classes.Exceptions;
+
 namespace Calc.Classes
 {
 	class NumberFormatter
@@ -10,7 +12,7 @@ namespace Calc.Classes
 		{
 			if (scientific && _decimal)
 			{
-				throw new Exceptions.BadCommandLineArguments(
+				throw new BadCommandLineArguments(
 					"Can't apply scientific and decimal notation simultaneously.");
 			}
 			else if (scientific)
@@ -31,7 +33,7 @@ namespace Calc.Classes
 				}
 				else
 				{
-					throw new Exceptions.BadCommandLineArguments(
+					throw new BadCommandLineArguments(
 						"Precision must be in range from 1 to 100.");
 				} 
 			}

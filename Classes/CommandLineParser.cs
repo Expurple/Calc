@@ -39,7 +39,7 @@ namespace Calc.Classes
 			var argument = new Argument<string>("argument",
 				"An arithmetic expression to solve.\n" +
 				"Can contain decimal or scientific numbers\n" +
-				"and the following operators: + - * / (  )\n" +
+				"and the following operators: + - * / % ^ (  )\n" +
 				"Variables and other operators are not supported.");
 			argument.Arity = ArgumentArity.ZeroOrOne;
 

@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
+using Calc.Classes.Exceptions;
+
 namespace Calc.Classes
 {
 	class Tokenizer
@@ -62,7 +64,7 @@ namespace Calc.Classes
 			}
 			catch (FormatException)
 			{
-				throw new Exceptions.InvalidMathExpression();
+				throw new InvalidMathExpression();
 			}
 		}
 	}

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 
+using Calc.Classes.Exceptions;
+
 namespace Calc.Classes
 {
 	class Calculator
@@ -17,7 +19,7 @@ namespace Calc.Classes
 			}
 			catch (ArgumentOutOfRangeException)
 			{
-				throw new Exceptions.InvalidMathExpression();
+				throw new InvalidMathExpression();
 			}
 		}
 
@@ -113,7 +115,7 @@ namespace Calc.Classes
 			}
 
 			// Else, the expression is something invalid
-			throw new Exceptions.InvalidMathExpression();
+			throw new InvalidMathExpression();
 		}
 
 		/// <summary>
@@ -140,7 +142,7 @@ namespace Calc.Classes
 					return Math.Pow(leftValue, rightValue);
 				default:
 					var message = "Calculator.PerformOperation called on invalid sign";
-					throw new Exceptions.LogicError(message);
+					throw new LogicError(message);
 			}
 		}
 
