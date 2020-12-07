@@ -9,7 +9,7 @@ namespace Calc.Classes
 	class Tokenizer
 	{
 		// This thread helped a lot: https://stackoverflow.com/questions/4680128
-		const string splitPattern = @"([*()\^\/]|(?<!E)[\+\-])";
+		const string splitPattern = @"([*%()\^\/]|(?<!E)[\+\-])";
 
 		public List<Token> Tokenize(string expression)
 		{
@@ -32,6 +32,10 @@ namespace Calc.Classes
 				else if (tokenStr == "^")
 				{
 					tokens.Add(new Token(Token.Type.Power, tokenStr));
+				}
+				else if (tokenStr == "%")
+				{
+					tokens.Add(new Token(Token.Type.Percent, tokenStr));
 				}
 				else if (tokenStr == "(" || tokenStr == ")")
 				{

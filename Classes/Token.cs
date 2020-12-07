@@ -31,6 +31,7 @@ namespace Calc.Classes
 			PlusMinus,
 			MultiplyDivide,
 			Power,
+			Percent,
 			Brace,
 		}
 	}

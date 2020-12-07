@@ -85,5 +85,21 @@ namespace Calc.Tests.Functionality
 			Assert.AreEqual(4.5, facade.Calculate("3^2/2"));
 			Assert.AreEqual(3, facade.Calculate("3^(2/2)"));
 		}
+
+		[Test]
+		public void Percent()
+		{
+			Assert.AreEqual(1, facade.Calculate("100%"));
+			Assert.AreEqual(0, facade.Calculate("2 * 0%"));
+			Assert.AreEqual(0.3, facade.Calculate("50% - 20%"));
+		}
+
+		[Test]
+		public void PercentPriority()
+		{
+			Assert.AreEqual(2, facade.Calculate("3-100%"));
+			Assert.AreEqual(3, facade.Calculate("3/100%"));
+			Assert.AreEqual(3, facade.Calculate("3^100%"));
+		}
 	}
 }

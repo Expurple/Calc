@@ -100,6 +100,12 @@ namespace Calc.Classes
 				}
 			}
 
+			// If a value has "%" suffix, divide by 100
+			if (tokens[^1].StrValue == "%")
+			{
+				return Evaluate(tokens.SkipLast(1).ToList()) / 100;
+			}
+
 			// If it's a single number, return the value
 			if (tokens.Count == 1 && tokens[0].type == Token.Type.Number)
 			{
