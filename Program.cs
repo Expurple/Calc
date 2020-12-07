@@ -50,13 +50,15 @@ namespace Calc
 			public int? Precision;
 			public bool ScientificOutput;
 			public bool DecimalOutput;
+			public bool PercentOutput;
 
 			public static readonly Options Default = new Options
 			{
 				ReadStdin = false,
 				Precision = null,
 				ScientificOutput = false,
-				DecimalOutput = false
+				DecimalOutput = false,
+				PercentOutput = false
 			};
 		}
 

@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System.Linq;
+using System.Globalization;
 
 using Calc.Classes.Exceptions;
 
@@ -7,13 +8,16 @@ namespace Calc.Classes
 	class NumberFormatter
 	{
 		string formatString = "G"; // it's default, look up MSDN for double.ToString method
+		bool percent;
 
-		public NumberFormatter(int? precision, bool scientific, bool _decimal)
+		public NumberFormatter(int? precision = null, bool scientific = false,
+								bool _decimal = false, bool percent = false)
 		{
-			if (scientific && _decimal)
+			if (new bool[] { scientific, _decimal, percent }.
+				Count(option => option == true) > 1)
 			{
 				throw new BadCommandLineArguments(
-					"Can't apply scientific and decimal notation simultaneously.");
+					"Can't apply more than one of -E, -d, -P options at once.");
 			}
 			else if (scientific)
 			{
@@ -23,13 +27,19 @@ namespace Calc.Classes
 			{
 				formatString = "F";
 			}
+			else if (percent)
+			{
+				// I don't like "P" format, provided by .NET
+				this.percent = percent;
+				formatString = "F2";
+			}
 
 			if (precision.HasValue)
 			{
 				// This is required by double.ToString method, look up MSDN
 				if (0 <= precision.Value && precision.Value <= 100)
 				{
-					formatString += precision.ToString();
+					formatString = formatString[0] + precision.ToString();
 				}
 				else
 				{
@@ -41,7 +51,10 @@ namespace Calc.Classes
 
 		public string Format(double value)
 		{
-			return value.ToString(formatString, CultureInfo.InvariantCulture);
+			if (!percent)
+				return value.ToString(formatString, CultureInfo.InvariantCulture);
+			else
+				return (value*100).ToString(formatString, CultureInfo.InvariantCulture) + " %";
 		}
 	}
 }

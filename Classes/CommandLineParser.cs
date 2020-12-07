@@ -14,15 +14,17 @@ namespace Calc.Classes
 		public CommandLineParser(Callback callback)
 		{
 			rootCommand = DescribeRootCommand();
-			rootCommand.Handler = CommandHandler.Create <string, bool, int?, bool, bool>(
-				(argument, readStdin, precision, scientificOutput, decimalOutput) =>
+			rootCommand.Handler = CommandHandler.Create (
+				(string argument, bool readStdin, int? precision,
+				bool scientificOutput, bool decimalOutput, bool percentOutput) =>
 				{
 					var parsedOptions = new Program.Options
 					{
 						ReadStdin = readStdin,
 						Precision = precision,
 						ScientificOutput = scientificOutput,
-						DecimalOutput = decimalOutput
+						DecimalOutput = decimalOutput,
+						PercentOutput = percentOutput
 					};
 					return callback(argument, parsedOptions);
 				}
@@ -49,19 +51,19 @@ namespace Calc.Classes
 					"Read the expression from stdin\n" +
 					"instead of command line arguments\n");
 			var precision = new Option<int?>(new string[] { "-p", "--precision" },
-					"Set output presicion (from 0 to 100)\n");
+					"Set output precision (from 0 to 100)\n");
 			var scientific = new Option<bool>(new string[] { "-E", "--scientific-output" },
-					"Force output in scientific notation,\n" +
-					"can't be used together with -d\n");
+					"Force output in scientific notation");
 			var _decimal = new Option<bool>(new string[] { "-d", "--decimal-output" },
-					"Force output in decimal notation,\n" +
-					"can't be used together with -E\n");
+					"Force output in decimal notation");
+			var percent = new Option<bool>(new string[] { "-P", "--percent-output" },
+					"Force output as a percent value\n");
 
 			// End of options
 
 			var rootCommand = new RootCommand
 			{
-				argument, readStdin, precision, scientific, _decimal
+				argument, readStdin, precision, scientific, _decimal, percent
 			};
 			
 			rootCommand.Name = "Calc";

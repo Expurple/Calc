@@ -11,8 +11,7 @@ namespace Calc.Tests.Units
 		[Test]
 		public void DefaultFormat()
 		{
-			var numberFormatter = new NumberFormatter(
-				precision: null, scientific: false, _decimal: false);
+			var numberFormatter = new NumberFormatter();
 			
 			Assert.AreEqual("-15", numberFormatter.Format(-15));
 			Assert.AreEqual("0.267", numberFormatter.Format(0.267));
@@ -23,8 +22,7 @@ namespace Calc.Tests.Units
 		[Test]
 		public void Scientific()
 		{
-			var numberFormatter = new NumberFormatter(
-				precision: null, scientific: true, _decimal: false);
+			var numberFormatter = new NumberFormatter(scientific: true);
 
 			Assert.IsTrue(numberFormatter.Format(-15).Contains("E"));
 			Assert.IsTrue(numberFormatter.Format(0.267).Contains("E"));
@@ -35,8 +33,7 @@ namespace Calc.Tests.Units
 		[Test]
 		public void Decimal()
 		{
-			var numberFormatter = new NumberFormatter(
-				precision: null, scientific: false, _decimal: true);
+			var numberFormatter = new NumberFormatter(_decimal: true);
 
 			Assert.IsFalse(numberFormatter.Format(-15).Contains("E"));
 			Assert.IsFalse(numberFormatter.Format(0.267).Contains("E"));
@@ -48,17 +45,14 @@ namespace Calc.Tests.Units
 		public void ScientificDecimalCollision()
 		{
 			Assert.Throws<BadCommandLineArguments>(
-				() => new NumberFormatter(
-					precision: null, scientific: true, _decimal: true
-				)
+				() => new NumberFormatter(scientific: true, _decimal: true)
 			);
 		}
 
 		[Test]
 		public void DecimalPrecision()
 		{
-			var numberFormatter = new NumberFormatter(
-				precision: 1, scientific: false, _decimal: true);
+			var numberFormatter = new NumberFormatter(precision: 1, _decimal: true);
 
 			Assert.AreEqual("-15.0", numberFormatter.Format(-15));
 			Assert.AreEqual("0.3", numberFormatter.Format(0.267));
@@ -68,8 +62,7 @@ namespace Calc.Tests.Units
 		[Test]
 		public void ScientificPrecision()
 		{
-			var numberFormatter = new NumberFormatter(
-				precision: 4, scientific: true, _decimal: false);
+			var numberFormatter = new NumberFormatter(precision: 4, scientific: true);
 
 			Assert.AreEqual("-1.5000E+001", numberFormatter.Format(-15));
 			Assert.AreEqual("2.6700E-001", numberFormatter.Format(0.267));
@@ -81,15 +74,37 @@ namespace Calc.Tests.Units
 		public void BadPrecisionValue()
 		{
 			Assert.Throws<BadCommandLineArguments>(
-				() => new NumberFormatter(
-					precision: -1, scientific: false, _decimal: false
-				)
+				() => new NumberFormatter(precision: -1)
 			);
 
 			Assert.Throws<BadCommandLineArguments>(
-				() => new NumberFormatter(
-					precision: 200, scientific: false, _decimal: false
-				)
+				() => new NumberFormatter(precision: 200)
+			);
+		}
+
+		[Test]
+		public void Percent()
+		{
+			var numberFormatter = new NumberFormatter(percent: true);
+
+			Assert.AreEqual("-1500.00 %", numberFormatter.Format(-15));
+			Assert.AreEqual("26.70 %", numberFormatter.Format(0.267));
+		}
+
+		[Test]
+		public void PercentPrecision()
+		{
+			var numberFormatter = new NumberFormatter(precision: 0, percent: true);
+
+			Assert.AreEqual("-1500 %", numberFormatter.Format(-15));
+			Assert.AreEqual("27 %", numberFormatter.Format(0.267));
+		}
+
+		[Test]
+		public void DecimalPercentCollision()
+		{
+			Assert.Throws<BadCommandLineArguments>(
+				() => new NumberFormatter(_decimal: true, percent: true)
 			);
 		}
 	}

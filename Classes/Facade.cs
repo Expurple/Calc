@@ -73,7 +73,8 @@ namespace Calc.Classes
 			numberFormatter = new NumberFormatter(
 				precision:   options.Precision,
 				scientific:  options.ScientificOutput,
-				_decimal:    options.DecimalOutput
+				_decimal:    options.DecimalOutput,
+				percent:     options.PercentOutput
 			);
 		}
 	}
