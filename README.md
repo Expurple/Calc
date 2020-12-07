@@ -1,20 +1,23 @@
 ﻿# Calc
 A simple command line .NET tool to calculate arithmetic expressions, written for fun and education.
 
-* Supports `+ - * /` and `( )` operators
+* Supports `+ - * / % ^` and `( )` operators
 * Doesn't support variables
-* For avaliable command line options see the [help message](https://github.com/Expurple/Images/blob/master/Calc/0.2.0.0help.png)
+* For avaliable command line options see the [help message](https://github.com/Expurple/Images/blob/master/Calc/0.3.0.0help.png)
 
-## Latest version (0.2.0.0)
+## Latest version (0.3.0.0)
 
-Added three command line options for output formatting:
-* `-p`, `--precision` - set output presicion
-* `-E`, `--scientific-output` - force output in scientific notation
-* `-d`, `--decimal-output` - force output in decimal notation
+Added two operators:
+* `^` - raising to power
+* `%` - unary percent operator (not a binary mod operator!)
+
+Added two command line options:
+* `-P`, `--percent-output` - force output as a percent value
+* `-i`, `--read-stdin` - read the expression from stdin
 
 Usage example:
 
-![](https://raw.githubusercontent.com/Expurple/Images/master/Calc/0.2.0.0usage.png)
+![](https://raw.githubusercontent.com/Expurple/Images/master/Calc/0.3.0.0usage.png)
 
 ## How to build
 

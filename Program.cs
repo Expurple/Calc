@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 using Calc.Classes;
 
 
-[assembly: AssemblyVersion("0.2.0.0")]
+[assembly: AssemblyVersion("0.3.0.0")]
 [assembly: InternalsVisibleTo("Tests")]
 
 namespace Calc
